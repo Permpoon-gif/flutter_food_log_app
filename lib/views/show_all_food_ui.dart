@@ -38,11 +38,11 @@ class _ShowAllFoodUiState extends State<ShowAllFoodUi> {
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => AddFoodUi()));
         },
+        backgroundColor: Colors.red,
         child: Icon(
           Icons.add,
           color: Colors.white,
           ),
-        backgroundColor: Colors.red,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

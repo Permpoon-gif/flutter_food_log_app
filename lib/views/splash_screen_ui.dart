@@ -41,7 +41,7 @@ class _SplashScreenUiState extends State<SplashScreenUi> {
             ),
           ),
           Text(
-            '',
+            '🍕🍔🍟🌭🥓🍗🍖🥫🍦🍨',
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
