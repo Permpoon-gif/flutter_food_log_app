@@ -1,5 +1,10 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter_food_log_app/models/food.dart';
 import 'package:flutter_food_log_app/views/add_food_ui.dart';
+import 'package:flutter_food_log_app/services/supabase_service.dart';
+
 
 class ShowAllFoodUi extends StatefulWidget {
   const ShowAllFoodUi({super.key});
@@ -9,6 +14,25 @@ class ShowAllFoodUi extends StatefulWidget {
 }
 
 class _ShowAllFoodUiState extends State<ShowAllFoodUi> {
+
+  List<Food> foods = [];
+  
+  final Service = SupabaseService();
+
+  //สร้างเมธอด
+  void loadAllFood() async {
+  //สร้างตัวแปรเก็บข้อมูล
+    final data = await Service.getAllFood();
+    setState(() {
+      foods = data;
+    });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadAllFood();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,12 +55,58 @@ class _ShowAllFoodUiState extends State<ShowAllFoodUi> {
               fit: BoxFit.cover,
             ),
             SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+
+                itemCount: foods.length,
+                //สร้างหน้าตา
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      left: 30,
+                      right: 30,
+                      top: 5,
+                      bottom: 5
+                    ),
+                    child: ListTile(
+                      onTap: () {},
+                      leading: Image.asset(
+                        'assets/images/food_img.png',
+                      ),
+                      trailing: Icon(
+                        Icons.info,
+                        color: Colors.red,
+                      ),
+                      title: Text(
+                        'กิน ${foods[index].foodName}',
+                      ),
+                      subtitle: Text(
+                        'วันที่ ${foods[index].foodDate},มื้อ ${foods[index].foodMeal}'),
+                      tileColor: index % 2 == 0 ? Colors.red.shade50 : Colors.red.shade100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+
+                  );
+                },
+                  
+            ),
+            ),
           ],
         ),
       ),
+              
+                
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddFoodUi()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddFoodUi()
+          ),
+          ).then((value) {
+            //กลับมาหน่าแล้วจะให้ทำอะไร
+            //เรียก 
+            loadAllFood();
+          });
         },
         backgroundColor: Colors.red,
         child: Icon(
