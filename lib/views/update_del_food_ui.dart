@@ -99,6 +99,7 @@ class _UpdateDelFoodUiState extends State<UpdateDelFoodUi> {
         duration: Duration(seconds: 2),
       ),
     );
+    Navigator.pop(context);
     //ย้อนกลับไปหน้า ShowAllFoodUi หลังแก้ไขข้อมูลเสร็จ
   }
 
