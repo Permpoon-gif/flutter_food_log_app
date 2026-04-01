@@ -160,7 +160,7 @@ class _UpdateDelFoodUiState extends State<UpdateDelFoodUi> {
         appBar: AppBar(
           backgroundColor: Colors.red,
           title: Text(
-            'กินกัน LOG',
+            'กินกัน LOG (แก้ไขข้อมูลและลบข้อมูล)',
             style: TextStyle(
               color: Colors.white,
             ),
